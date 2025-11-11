@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> GC Video Analysis </title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js" defer></script>
+</head>
+<body>
+  <pointer-particles></pointer-particles>
+  <main class="container">
+    <aside id="historyPanel" class="history-panel glass hidden">
+      <div class="history-header">
+        <button class="history-tab active" id="historyTabBtn">History</button>
+        <div class="history-header-right">
+          <div class="particles-toggle-container">
+            <label class="particles-toggle-label">Cursor</label>
+            <button class="particles-toggle" id="particlesToggle" aria-label="Toggle pointer particles">
+              <span class="toggle-slider"></span>
+            </button>
+          </div>
+          <button class="history-close-btn" id="historyCloseBtn" aria-label="Close history panel">✕</button>
+        </div>
+      </div>
+      <div id="historyList" class="history-list"></div>
+      <div class="history-footer">
+        <div class="storage-info">
+          <div class="storage-header">
+            <span class="storage-label">Storage</span>
+            <span class="storage-value" id="storageValue">0 KB / 20 GB</span>
+          </div>
+          <div class="storage-progress-container">
+            <div class="storage-progress">
+              <div class="storage-progress-bar" id="storageProgressBar" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="main-content">
+    <header class="header glass">
+      <h1> GC Video Analysis </h1>
+      <div class="header-actions">
+        <button id="newAnalysisBtn" class="btn ghost">✨ New Analysis</button>
+        <button id="historyToggle" class="btn ghost">📜 History</button>
+        <button id="themeToggle" class="btn ghost">🌓 Theme</button>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="analysis">Analysis</button>
+      <button class="tab" data-tab="results">Results</button>
+    </div>
+
+    <div id="analysisTab" class="tab-content active">
+      <section class="card glass">
+        <p class="muted">
+          Upload a video.
+        </p>
+
+        <form id="form">
+          <section class="panel">
+              <h2>Input</h2>
+
+              <div id="dropZone" class="dropzone" tabindex="0">
+                <input id="video" name="video" type="file" accept="video/*" hidden />
+                <div class="dz-body">
+                  <div class="dz-icon">🎬</div>
+                  <div>
+                    <div class="dz-title">Drag & drop a video</div>
+                    <div class="dz-sub">or <button id="browseBtn" type="button" class="link">browse</button></div>
+                  </div>
+                </div>
+                <div id="fileInfo" class="dz-file hidden"></div>
+              </div>
+
+              <div class="divider"><span></span></div>
+
+              <!-- <label class="field">
+                <span>YouTube URL</span>
+                <input id="url" name="url" type="url" placeholder="https://www.youtube.com/watch?v=..." />
+              </label> -->
+
+              <label class="field hidden">
+                <span>Your analysis prompt <span class="required">*</span></span>
+                <textarea id="prompt" name="prompt" rows="6" placeholder="e.g., Find all timestamps where a dog appears on screen."></textarea>
+              </label>
+
+              <div class="actions">
+                <button id="submitBtn" class="btn primary" type="submit">Analyze</button>
+                <button id="clearBtn" class="btn ghost" type="button">Clear</button>
+              </div>
+            </section>
+        </form>
+      </section>
+    </div>
+
+    <div id="resultsTab" class="tab-content">
+      <section id="resultsSection" class="card glass">
+        <h2>Analysis Results</h2>
+        <div class="results-actions" style="display:flex;gap:8px;margin-bottom:10px;">
+          <button id="copyBtn" class="btn ghost" type="button">Copy Raw Text</button>
+          <button id="saveBtn" class="btn ghost" type="button">Save Raw .txt</button>
+          <button id="downloadDocxBtn" class="btn ghost" type="button">Export .docx</button>
+        </div>
+        <div class="results-grid">
+          <div class="video-container">
+            <video id="resultVideo" controls width="100%"></video>
+          </div>
+          <div class="sidebar-container">
+            <div id="summary" class="summary">
+              </div>
+          </div>
+        </div>
+        <pre id="results" class="results-pre" aria-live="polite" style="display: none;"></pre>
+      </section>
+    </div>
+    </div>
+    </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Progress Modal -->
+  <div id="progressModal" class="progress-modal hidden">
+    <div class="progress-modal-content glass">
+      <div class="progress-modal-header">
+        <button class="progress-modal-close-btn" id="progressModalCloseBtn" aria-label="Close">✕</button>
+        <div class="loading-spinner"></div>
+        <h2 id="progressTitle">Submitting...</h2>
+        <div id="queueInfo" class="queue-info hidden">Queue Position: <span id="queueNumber">-</span></div>
+      </div>
+      <div class="progress-modal-body">
+        <div class="transfer-card hidden" id="transferStatsCard" aria-live="polite">
+          <div class="transfer-speed" id="transferSpeed">0 MB/s</div>
+          <div class="transfer-meta">
+            <span id="transferProgress">0 MB / 0 MB</span>
+            <span class="transfer-dot" aria-hidden="true">•</span>
+            <span id="transferRemaining">0 MB left</span>
+          </div>
+        </div>
+        <div class="overall-progress-section">
+          <div class="progress-label">Overall Progress</div>
+          <div class="progress">
+            <div class="progress-bar" id="uploadBar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="analysis-progress-section">
+          <div class="progress-label">Analysis Progress</div>
+          <div class="stepper-horizontal" id="stepper">
+            <div class="stepper-step" data-step="upload">
+              <div class="step-indicator"></div>
+              <div class="step-label">Upload & Progress</div>
+            </div>
+            <!-- <div class="stepper-step" data-step="process">
+              <div class="step-indicator"></div>
+              <div class="step-label">Process</div>
+            </div>
+            <div class="stepper-step" data-step="analyze">
+              <div class="step-indicator"></div>
+              <div class="step-label">Analyze</div>
+            </div> -->
+            <div class="stepper-step" data-step="complete">
+              <div class="step-indicator"></div>
+              <div class="step-label">Complete</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-message" id="statusMessage">
+          <div class="status-icon">⟳</div>
+          <span id="uploadText">Connecting to server...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>

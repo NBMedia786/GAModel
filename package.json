@@ -1,0 +1,22 @@
+{
+  "name": "video-analysis-tool",
+  "version": "1.4.0",
+  "description": "Web-based video analysis tool using Gemini 2.5 Pro (streaming, robust yt-dlp bootstrap without wrapper)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "form-data": "^4.0.4",
+    "mime-types": "^2.1.35",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2"
+  }
+}

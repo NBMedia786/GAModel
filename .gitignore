@@ -1,0 +1,25 @@
+node_modules/
+history/
+
+# Dependency logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+
+
+# Editor directories and files
+.vscode/
+.idea/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+coverage/
+.cache/
