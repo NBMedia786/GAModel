@@ -1,0 +1,180 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "React",
+    "Vite",
+    "Tailwind CSS",
+    "shadcn-ui",
+    "Radix UI",
+    "React Router",
+    "Express",
+    "Node.js",
+    "Google Generative AI (Gemini)"
+  ],
+  "features": [
+    {
+      "name": "Project Management",
+      "description": "Main dashboard for managing video projects with grid/list views, filtering, sorting, and project CRUD operations",
+      "files": [
+        "src/pages/Index.tsx",
+        "src/pages/Project.tsx",
+        "src/components/ProjectCard.tsx",
+        "src/components/FilterBar.tsx",
+        "src/components/NewProjectDialog.tsx",
+        "src/components/DeleteProjectDialog.tsx",
+        "src/components/RenameProjectDialog.tsx",
+        "src/components/ShareProjectDialog.tsx"
+      ]
+    },
+    {
+      "name": "Video Player",
+      "description": "Advanced video player with playback controls, timeline navigation, fullscreen support, and video analysis integration",
+      "files": [
+        "src/pages/VideoPlayer.tsx",
+        "src/components/VideoPlayerControls.tsx",
+        "src/components/VideoTimelineMarkers.tsx",
+        "src/components/VideoSettingsMenu.tsx"
+      ]
+    },
+    {
+      "name": "Video Upload",
+      "description": "Page for uploading video files to the platform",
+      "files": [
+        "src/pages/UploadVideo.tsx"
+      ]
+    },
+    {
+      "name": "AI Video Analysis",
+      "description": "AI-powered video analysis using Google Gemini API to detect errors in video subtitles with streaming results",
+      "files": [
+        "src/services/api.ts",
+        "src/pages/VideoPlayer.tsx",
+        "server.js"
+      ]
+    },
+    {
+      "name": "Comments System",
+      "description": "Hybrid comment system supporting both AI-generated error analysis and manual human comments with timestamp-based navigation",
+      "files": [
+        "src/components/VideoComments.tsx",
+        "src/pages/VideoPlayer.tsx"
+      ]
+    },
+    {
+      "name": "Search Functionality",
+      "description": "Global search dialog for finding projects across the application",
+      "files": [
+        "src/components/SearchDialog.tsx",
+        "src/components/Sidebar.tsx",
+        "src/components/TopBar.tsx"
+      ]
+    },
+    {
+      "name": "Navigation",
+      "description": "Main navigation components including sidebar and top bar with search integration",
+      "files": [
+        "src/components/Sidebar.tsx",
+        "src/components/TopBar.tsx",
+        "src/components/ProjectSidebar.tsx",
+        "src/components/ProjectTopBar.tsx"
+      ]
+    },
+    {
+      "name": "File Management",
+      "description": "File card component for displaying video files within projects",
+      "files": [
+        "src/components/FileCard.tsx"
+      ]
+    },
+    {
+      "name": "Notifications",
+      "description": "Notifications page for displaying user notifications with read/unread status",
+      "files": [
+        "src/pages/Notifications.tsx"
+      ]
+    },
+    {
+      "name": "Team Management",
+      "description": "Team page for managing team members, roles, and permissions",
+      "files": [
+        "src/pages/Team.tsx"
+      ]
+    },
+    {
+      "name": "Messages",
+      "description": "Messaging interface for team communication",
+      "files": [
+        "src/pages/Messages.tsx"
+      ]
+    },
+    {
+      "name": "Settings",
+      "description": "User settings page for profile, notifications, appearance, and security settings",
+      "files": [
+        "src/pages/Settings.tsx"
+      ]
+    },
+    {
+      "name": "Storage Management",
+      "description": "Storage page showing storage usage, categories, and recent files",
+      "files": [
+        "src/pages/Storage.tsx"
+      ]
+    },
+    {
+      "name": "UI Component Library",
+      "description": "Comprehensive shadcn-ui component library based on Radix UI primitives",
+      "files": [
+        "src/components/ui/accordion.tsx",
+        "src/components/ui/alert-dialog.tsx",
+        "src/components/ui/alert.tsx",
+        "src/components/ui/avatar.tsx",
+        "src/components/ui/badge.tsx",
+        "src/components/ui/button.tsx",
+        "src/components/ui/card.tsx",
+        "src/components/ui/checkbox.tsx",
+        "src/components/ui/dialog.tsx",
+        "src/components/ui/dropdown-menu.tsx",
+        "src/components/ui/input.tsx",
+        "src/components/ui/label.tsx",
+        "src/components/ui/scroll-area.tsx",
+        "src/components/ui/select.tsx",
+        "src/components/ui/slider.tsx",
+        "src/components/ui/tabs.tsx",
+        "src/components/ui/toast.tsx",
+        "src/components/ui/tooltip.tsx"
+      ]
+    },
+    {
+      "name": "Custom Hooks",
+      "description": "Reusable React hooks for mobile detection and toast notifications",
+      "files": [
+        "src/hooks/use-mobile.tsx",
+        "src/hooks/use-toast.ts"
+      ]
+    },
+    {
+      "name": "Backend API Server",
+      "description": "Express server for video upload, processing, and AI analysis using Google Gemini API",
+      "files": [
+        "server.js"
+      ]
+    },
+    {
+      "name": "Routing",
+      "description": "React Router configuration for application navigation",
+      "files": [
+        "src/App.tsx",
+        "src/pages/NotFound.tsx"
+      ]
+    },
+    {
+      "name": "Utilities",
+      "description": "Utility functions for className merging and other helpers",
+      "files": [
+        "src/lib/utils.ts"
+      ]
+    }
+  ]
+}
+

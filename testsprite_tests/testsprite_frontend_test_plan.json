@@ -1,0 +1,465 @@
+[
+  {
+    "id": "TC001",
+    "title": "Video upload success",
+    "description": "Verify that a user can successfully select and upload a valid video file and start the analysis process.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Upload Page"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid video file (supported format and size)"
+      },
+      {
+        "type": "action",
+        "description": "Click 'Start Analysis' button"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that upload starts and progresses without error"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify redirection to Video Player page with selected video loaded"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Video upload failure with invalid file",
+    "description": "Verify system handles unsupported file types or corrupted files gracefully during upload.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Upload Page"
+      },
+      {
+        "type": "action",
+        "description": "Select an invalid or unsupported video file"
+      },
+      {
+        "type": "action",
+        "description": "Click 'Start Analysis' button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that error message is displayed for unsupported file"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify upload is blocked and user remains on upload page"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Video player playback controls functionality",
+    "description": "Verify that the advanced video player supports play, pause, seek, volume, and fullscreen operations on uploaded videos.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to Video Player page with a loaded video"
+      },
+      {
+        "type": "action",
+        "description": "Click play button and verify video plays"
+      },
+      {
+        "type": "action",
+        "description": "Click pause button and verify video pauses"
+      },
+      {
+        "type": "action",
+        "description": "Use timeline slider to seek to different timestamps"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify video jumps to corresponding timestamps correctly"
+      },
+      {
+        "type": "action",
+        "description": "Adjust volume control and verify audio volume changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Volume is changed accordingly"
+      },
+      {
+        "type": "action",
+        "description": "Enter fullscreen mode via player controls"
+      },
+      {
+        "type": "assertion",
+        "description": "Video player switches to fullscreen and remains functional"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "AI analysis initiation and progress states",
+    "description": "Verify clicking the 'Start AI Analysis' triggers the AI subtitle error detection process with upload and analyzing progress states visible.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "On Video Player page, click 'Start AI Analysis' button"
+      },
+      {
+        "type": "assertion",
+        "description": "Upload progress state is displayed and progresses"
+      },
+      {
+        "type": "assertion",
+        "description": "Upon upload completion, analysis progress state is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "AI analysis completes with results shown in Results Sidebar"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Results sidebar displays AI detected errors",
+    "description": "Verify AI detected subtitle errors are accurately displayed in the Results Sidebar with clickable entries that seek video timestamps.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Complete AI analysis for a video with known subtitle errors"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify AI detected errors are listed in the Results Sidebar with timestamp info"
+      },
+      {
+        "type": "action",
+        "description": "Click on an AI detected error card"
+      },
+      {
+        "type": "assertion",
+        "description": "Video player seeks to the error's timestamp accurately"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Add and display manual timestamped comments",
+    "description": "Ensure users can manually add comments linked to current video timestamps and comments appear immediately in the results list.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to Video Player page with loaded video"
+      },
+      {
+        "type": "action",
+        "description": "Play video and pause at a desired timestamp"
+      },
+      {
+        "type": "action",
+        "description": "Enter a manual comment in the input field and submit"
+      },
+      {
+        "type": "assertion",
+        "description": "Comment appears instantly in Results Sidebar with correct timestamp"
+      },
+      {
+        "type": "action",
+        "description": "Click on the manual comment card"
+      },
+      {
+        "type": "assertion",
+        "description": "Video player seeks to the comment timestamp correctly"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Project management CRUD operations",
+    "description": "Verify users can create, rename, delete, and share projects correctly with UI updates and no errors.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to Project Management dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Create a new project with valid name"
+      },
+      {
+        "type": "assertion",
+        "description": "New project appears in the list"
+      },
+      {
+        "type": "action",
+        "description": "Rename the created project"
+      },
+      {
+        "type": "assertion",
+        "description": "Project shows updated name"
+      },
+      {
+        "type": "action",
+        "description": "Share the project and verify sharing options"
+      },
+      {
+        "type": "assertion",
+        "description": "Project sharing succeeds and updated sharing status shows"
+      },
+      {
+        "type": "action",
+        "description": "Delete the project"
+      },
+      {
+        "type": "assertion",
+        "description": "Project is removed from the list without errors"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Global project search functionality",
+    "description": "Validate that the global search reliably returns relevant project results matching search queries.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open global search dialog"
+      },
+      {
+        "type": "action",
+        "description": "Enter a search term matching existing project names"
+      },
+      {
+        "type": "assertion",
+        "description": "Search results display relevant projects containing the search term"
+      },
+      {
+        "type": "action",
+        "description": "Enter a search term with no matching projects"
+      },
+      {
+        "type": "assertion",
+        "description": "Search results indicate no matches found without errors"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Team management role and permission modifications",
+    "description": "Ensure team member roles and permissions can be updated and persist correctly.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to Team Management page"
+      },
+      {
+        "type": "action",
+        "description": "Select a team member and change their role"
+      },
+      {
+        "type": "assertion",
+        "description": "Role update succeeds and changes persist after page reload"
+      },
+      {
+        "type": "action",
+        "description": "Adjust permissions for a team member (if applicable)"
+      },
+      {
+        "type": "assertion",
+        "description": "Permissions update correctly and persist"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Notification center read/unread state handling",
+    "description": "Verify that notifications correctly display read and unread states, and state changes persist when notifications are marked read.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to Notification Center page"
+      },
+      {
+        "type": "assertion",
+        "description": "Unread notifications are visually distinct from read notifications"
+      },
+      {
+        "type": "action",
+        "description": "Mark an unread notification as read"
+      },
+      {
+        "type": "assertion",
+        "description": "Notification read state updates visually and persists after page reload"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "User settings changes persist and reflect correctly",
+    "description": "Verify that modifications to profile, notification preferences, appearance, and security settings are saved and correctly applied.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to User Settings page"
+      },
+      {
+        "type": "action",
+        "description": "Change profile details (e.g., display name, email)"
+      },
+      {
+        "type": "action",
+        "description": "Modify notification preferences and appearance settings"
+      },
+      {
+        "type": "action",
+        "description": "Change security settings such as password"
+      },
+      {
+        "type": "action",
+        "description": "Save all changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm all changes persist and UI reflects them after page reload"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Storage usage overview accuracy",
+    "description": "Validate that storage overview page shows accurate usage data, categories, and recent files updates appropriately with file operations.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to Storage Management page"
+      },
+      {
+        "type": "assertion",
+        "description": "Storage usage and file categories display accurate values matching backend data"
+      },
+      {
+        "type": "action",
+        "description": "Upload a new video file"
+      },
+      {
+        "type": "assertion",
+        "description": "Storage usage updates accordingly and new file is listed in recent files"
+      },
+      {
+        "type": "action",
+        "description": "Delete a file"
+      },
+      {
+        "type": "assertion",
+        "description": "Storage usage decreases and deleted file is removed from recent files"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Error handling for AI analysis failures",
+    "description": "Test how the system handles and displays errors during AI subtitle analysis, such as API failures or network issues.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Trigger AI analysis with simulated API failure or network interruption"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that a clear error message is displayed to the user"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure the UI allows retrying the analysis without crashing or freezing"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Manual comment input validation and limits",
+    "description": "Verify input validation for manual comments including empty input, max length, and special characters handling.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Attempt to submit an empty comment"
+      },
+      {
+        "type": "assertion",
+        "description": "Submission is blocked and an appropriate validation error is shown"
+      },
+      {
+        "type": "action",
+        "description": "Enter a comment exceeding max allowed length"
+      },
+      {
+        "type": "assertion",
+        "description": "Submission is blocked or truncated with an appropriate message"
+      },
+      {
+        "type": "action",
+        "description": "Add a comment containing special characters or emojis"
+      },
+      {
+        "type": "assertion",
+        "description": "Comment is accepted and displayed correctly without UI breakage"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Navigation components usability and accessibility",
+    "description": "Verify sidebar, top bar, and project navigation components render correctly, are accessible via keyboard, and facilitate smooth navigation.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load application and verify sidebar and top bar render"
+      },
+      {
+        "type": "action",
+        "description": "Use keyboard navigation to access sidebar and open project list"
+      },
+      {
+        "type": "assertion",
+        "description": "Focus states and ARIA attributes are present and usable"
+      },
+      {
+        "type": "action",
+        "description": "Click on links to navigate between projects and main pages"
+      },
+      {
+        "type": "assertion",
+        "description": "Navigation occurs without errors and UI updates accordingly"
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8080",
+  "executionArgs": {
+    "projectName": "frame-ai-hub-main",
+    "projectPath": "D:\\Arpit Sharma\\Desktop\\frame-ai-hub-main",
+    "testIds": [],
+    "additionalInstruction": "",
+    "envs": {
+      "API_KEY": "sk-user-Q8TKVGaINDwNBNX1jDWcRDW6ffKyt-i9aVbCFAU4SVFu6v5xluc0hYHy_ic8BT4tuXb0fxiCsTddgSOmzhZUEOQMc8QWtOW9fKg8E3cfW0CZOcpUuOgZbIbofctHeUXn0cs"
+    }
+  },
+  "proxy": "http://40e6cb2d-302b-4e94-9d49-5de775694268:OwBS9NRF8l0MV9NqN8CGZjAha6tVHIK2@tun.testsprite.com:8080"
+}

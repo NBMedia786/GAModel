@@ -1,0 +1,24 @@
+# App Name: GC Video Analysis Hub
+
+## Purpose
+A video quality assurance platform where users upload videos to find errors automatically using AI.
+
+## Core Features to Test:
+1. **Upload Page:**
+   - User can select a video file.
+   - User clicks "Start Analysis" to proceed.
+   - Redirects to the Video Player page.
+
+2. **Video Player:**
+   - Plays the uploaded video locally.
+   - Has a "Start AI Analysis" button in the top header.
+   - Clicking "Start AI Analysis" triggers a progress bar (Uploading -> Analyzing).
+
+3. **Results Sidebar:**
+   - Displays a list of errors found by the AI.
+   - Displays "Human Comments" added by the user.
+   - Clicking an error card should SEEK the video to that specific timestamp.
+
+4. **Comment Input:**
+   - User can type a manual comment at the bottom of the sidebar.
+   - Comment appears in the list immediately.
