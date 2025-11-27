@@ -144,15 +144,21 @@ function analyzeExistingVideo(
             return;
           }
 
+          // Check for notices (skip but don't error)
+          if (line.startsWith('[Notice]')) {
+            continue;
+          }
+
           // Regular text chunks (analysis results)
-          if (line.trim() && !line.startsWith('[') && !line.includes('PROGRESS')) {
+          // Only skip if it's EXACTLY a progress marker line, not just any line with brackets
+          if (line.trim() && !line.match(/^\[PROGRESS:/)) {
             onTextChunk?.(line + '\n');
           }
         }
       }
 
       // Process remaining buffer
-      if (buffer.trim() && !buffer.startsWith('[') && !buffer.includes('PROGRESS')) {
+      if (buffer.trim() && !buffer.match(/^\[PROGRESS:/)) {
         onTextChunk?.(buffer);
       }
 
@@ -193,8 +199,13 @@ function parseStreamingResponsePartial(
       continue;
     }
 
+    // Check for notices (skip but don't error)
+    if (line.startsWith('[Notice]')) {
+      continue;
+    }
+
     // Regular text chunks (analysis results)
-    if (line.trim() && !line.startsWith('[') && !line.includes('PROGRESS')) {
+    if (line.trim() && !line.match(/^\[PROGRESS:/)) {
       onTextChunk?.(line + '\n');
     }
   }
@@ -238,8 +249,13 @@ function parseStreamingResponse(
       return;
     }
 
+    // Check for notices (skip but don't error)
+    if (line.startsWith('[Notice]')) {
+      continue;
+    }
+
     // Regular text chunks (analysis results) - skip empty lines and progress markers
-    if (line.trim() && !line.startsWith('[') && !line.includes('PROGRESS')) {
+    if (line.trim() && !line.match(/^\[PROGRESS:/)) {
       currentText += line + '\n';
       onTextChunk?.(line + '\n');
     }

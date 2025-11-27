@@ -1354,42 +1354,42 @@ app.post('/api/project/:id/analyze', strictLimiter, async (req, res) => {
       const metaData = await fsp.readFile(metaPath, 'utf8');
       const meta = JSON.parse(metaData);
       videoFileName = meta.videoFileName;
-      logDebug(`[DEBUG] Found videoFileName in metadata: '${videoFileName}'`);
+      logger.debug('Found videoFileName in metadata', { videoFileName });
     } catch (e) {
       // Fallback: look for video files in dir
       const files = await fsp.readdir(projectDir);
       videoFileName = files.find(f => ['.mp4', '.mov', '.avi', '.mkv', '.webm'].includes(path.extname(f).toLowerCase()));
-      logDebug(`[DEBUG] Auto-detected videoFileName: '${videoFileName}'`);
+      logger.debug('Auto-detected videoFileName', { videoFileName });
     }
   }
 
-  logDebug(`[DEBUG] Resolved videoFileName: '${videoFileName}'`);
+  logger.debug('Resolved videoFileName', { videoFileName });
 
   if (!videoFileName) {
-    logDebug('[DEBUG] No video file found in project (videoFileName is null/empty)');
+    logger.warn('No video file found in project');
     return res.status(404).json({ error: 'No video file found in project' });
   }
 
   const videoPath = path.join(projectDir, videoFileName);
-  logDebug(`[DEBUG] Checking videoPath: '${videoPath}'`);
+  logger.debug('Checking videoPath', { videoPath });
 
   // Check if video file exists
   try {
     await fsp.access(videoPath);
-    logDebug('[DEBUG] Video file exists (Exact match)');
+    logger.debug('Video file exists (Exact match)', { videoPath });
   } catch (e) {
-    logDebug(`[DEBUG] Video file NOT found at '${videoPath}': ${e.message}`);
+    logger.debug('Video file NOT found', { videoPath, error: e.message });
 
     // --- FUZZY MATCHING FALLBACK ---
-    logDebug('[DEBUG] Attempting fuzzy match...');
+    logger.debug('Attempting fuzzy match');
     try {
       const files = await fsp.readdir(projectDir);
-      logDebug(`[DEBUG] Files in directory: ${JSON.stringify(files)}`);
+      logger.debug('Files in directory', { files });
 
       // Helper to normalize filenames (remove non-alphanumeric, lowercase)
       const normalize = (str) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
       const targetNormalized = normalize(videoFileName);
-      logDebug(`[DEBUG] Target normalized: '${targetNormalized}'`);
+      logger.debug('Target normalized', { targetNormalized });
 
       const fuzzyMatch = files.find(f => {
         const fileNormalized = normalize(f);
@@ -1400,7 +1400,7 @@ app.post('/api/project/:id/analyze', strictLimiter, async (req, res) => {
       });
 
       if (fuzzyMatch) {
-        logDebug(`[DEBUG] Fuzzy match FOUND: '${fuzzyMatch}'`);
+        logger.debug('Fuzzy match FOUND', { fuzzyMatch });
         videoFileName = fuzzyMatch;
         // Update videoPath with the found file
         const newVideoPath = path.join(projectDir, videoFileName);
@@ -1416,10 +1416,10 @@ app.post('/api/project/:id/analyze', strictLimiter, async (req, res) => {
         addToQueue(() => processAnalysisJob(newVideoPath, prompt, res));
         return; // Exit this handler, job is queued
       } else {
-        logDebug('[DEBUG] No fuzzy match found.');
+        logger.debug('No fuzzy match found');
       }
     } catch (err) {
-      logDebug(`[DEBUG] Fuzzy match error: ${err.message}`);
+      logger.error('Fuzzy match error', { error: err.message });
     }
     // --- END FUZZY MATCHING ---
 
