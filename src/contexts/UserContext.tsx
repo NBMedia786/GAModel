@@ -11,7 +11,8 @@ export interface User {
 interface UserContextType {
     user: User | null;
     isAuthenticated: boolean;
-    login: (partialUser: { email: string; firstName: string; lastName: string; photoURL?: string }) => Promise<void>;
+    login: () => void;
+    isLoading: boolean;
     logout: () => void;
 }
 
@@ -42,7 +43,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const login = () => {
-        window.location.href = "http://localhost:3000/api/auth/google";
+        window.location.href = "/api/auth/google";
     };
 
     const logout = async () => {

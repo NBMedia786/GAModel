@@ -15,6 +15,7 @@ import { GoogleAIFileManager } from '@google/generative-ai/server';
 import { lookup as mimeLookup } from 'mime-types';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import logger from './logger.js';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import session from 'express-session';
@@ -1734,13 +1735,11 @@ app.get('/api/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login?error=auth_failed' }),
   function (req, res) {
     // Successful authentication, redirect to Frontend
-    res.redirect('http://localhost:8080/');
-    // In dev, frontend is on 8080 usually? 
-    // If backend is 3000 and frontend is 8080, we might need to redirect to FRONTEND URL.
-    // Assuming proxy or redirect to :5173 / :8080.
-    // Let's assume we redirect to the frontend origin.
-    // If running separately:
-    // res.redirect('http://localhost:8080/');
+    const frontendUrl = process.env.CORS_ORIGINS && process.env.NODE_ENV === 'production'
+      ? process.env.CORS_ORIGINS.split(',')[0]
+      : 'http://localhost:8080/';
+
+    res.redirect(frontendUrl);
   }
 );
 // NOTE: I'll hardcode localhost:8080 for callback redirect for now as per user env.

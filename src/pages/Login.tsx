@@ -5,8 +5,8 @@ import { Card } from "@/components/ui/card";
 const Login = () => {
 
     const handleGoogleLogin = () => {
-        // Redirect to Backend OAuth Endpoint
-        window.location.href = "http://localhost:3000/api/auth/google";
+        // Redirect to Backend OAuth Endpoint (relative path for production & dev proxy)
+        window.location.href = "/api/auth/google";
     };
 
     return (
