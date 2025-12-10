@@ -49,6 +49,11 @@ logger.info('🚀 Starting Frame AI Hub Server', {
 
 const app = express();
 
+// Trust the reverse proxy (Nginx) - Critical for Rate Limiting & OAuth
+app.set('trust proxy', 1);
+
+
+
 // --- SECURITY MIDDLEWARE ---
 
 // Helmet - Security headers
