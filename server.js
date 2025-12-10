@@ -1697,10 +1697,10 @@ passport.use(new GoogleStrategy({
       const lastName = profile.name.familyName;
       const photoURL = profile.photos[0].value;
 
-      // Domain Restriction
-      if (!email.endsWith('@nbmediaproductions.com')) {
-        return cb(null, false, { message: 'Unauthorized domain' });
-      }
+      // Domain Restriction (Temporarily Disabled for testing)
+      // if (!email.endsWith('@nbmediaproductions.com')) {
+      //   return cb(null, false, { message: 'Unauthorized domain' });
+      // }
 
       const users = await getUsers();
       const now = new Date().toISOString();

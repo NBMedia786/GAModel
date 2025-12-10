@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles, Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { useUser } from "@/contexts/UserContext";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
+    const { isAuthenticated, isLoading } = useUser();
+
+    if (isLoading) return null; // Or a spinner
+    if (isAuthenticated) return <Navigate to="/" replace />;
 
     const handleGoogleLogin = () => {
         // Redirect to Backend OAuth Endpoint (relative path for production & dev proxy)
